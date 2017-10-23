@@ -59,12 +59,6 @@ public class IIDRHbaseApp {
             LOGGER.error("No arguments passed");
             System.exit(1);
         }
-        String keytab = args[0];
-        if (Strings.isNullOrEmpty(keytab)) {
-            LOGGER.error("Err: first argument needs to be keytab file absolute path");
-            System.exit(2);
-        }
-        LOGGER.info("Start: hbase insertion anthem. keytab:{}", keytab);
 
         IIDRHbaseApp iidrHbaseApp = new IIDRHbaseApp(TABLE_NAME, COLUMN_FAMILY_NAME, COLUMN_NAME);
         LOGGER.info(">>Instantiation done....");
@@ -88,13 +82,17 @@ public class IIDRHbaseApp {
             return;
         }
         KEYTAB = cmd.getOptionValue("keytab");
+        if (Strings.isNullOrEmpty(KEYTAB)) {
+            LOGGER.error("Err: first argument needs to be keytab file absolute path");
+            System.exit(2);
+        }
         LOGGER.debug(">>Parsed keytab:{}", KEYTAB);
     }
 
     public void insertData() {
         Stopwatch stopwatch = Stopwatch.createStarted();
         try (Connection connection = ConnectionFactory.createConnection(conf)) {
-            System.out.println("Connection ready...");
+            LOGGER.debug(">>Connection ready...");
             String rowKey = "myKey-" + rand.nextInt(100000);
             String val = "hello world-" + rand.nextInt(934552);
             Put put = new Put(Bytes.toBytes(rowKey));
