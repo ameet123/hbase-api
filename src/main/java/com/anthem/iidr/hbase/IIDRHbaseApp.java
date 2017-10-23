@@ -65,7 +65,6 @@ public class IIDRHbaseApp {
             System.exit(2);
         }
         LOGGER.info("Start: hbase insertion anthem. keytab:{}", keytab);
-        System.exit(3);
 
         IIDRHbaseApp iidrHbaseApp = new IIDRHbaseApp(TABLE_NAME, COLUMN_FAMILY_NAME, COLUMN_NAME);
         LOGGER.info(">>Instantiation done....");
