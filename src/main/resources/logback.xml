@@ -31,7 +31,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.anthem" level="DEBUG"/>
+    <logger name="com.anthem.iidr" level="DEBUG"/>
     <root level="INFO">
         <appender-ref ref="FILE"/>
         <appender-ref ref="CONSOLE"/>
